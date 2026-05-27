@@ -37,6 +37,7 @@ for _, row in ipairs(lights) do
 		drawtype = drawtype,
 		node_box = nodebox,
 		selection_box = nodebox,
+		drop = on,
 		on_punch = function(pos, node, puncher)
             minetest.set_node(pos, {name=on, param2=node.param2})
         end,
@@ -44,7 +45,7 @@ for _, row in ipairs(lights) do
     })
     minetest.register_node(on, {
         description = desc.." (Active)",
-        drop = off,
+        drop = on,
 		tiles = { tiles },
 		light_source = 14,
 		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2, not_in_creative_inventory=2},
@@ -64,7 +65,7 @@ end
 --	CRAFTING
 --Light
 minetest.register_craft({
-	output = '"lightsplus:light" 10',
+	output = "lightsplus:light_on 10",
 	recipe = {
 		{'default:glass', 'default:glass', 'default:glass'},
 		{'default:torch', 'default:torch', 'default:torch'},
@@ -75,72 +76,80 @@ minetest.register_craft({
 --Gold Light
 minetest.register_craft({
 	type = "shapeless",
-	output = "lightsplus:gold_light",
-	recipe = {'lightsplus:light', 'default:gold_ingot'},
+	output = "lightsplus:gold_light_on",
+	recipe = {'lightsplus:light_on', 'default:gold_ingot'},
 })
 
 --Gold Slab Light
 minetest.register_craft({
-	output = '"lightsplus:gold_slab_light" 6',
+	output = "lightsplus:gold_slab_light_on 6",
 	recipe = {
-		{'lightsplus:gold_light', 'lightsplus:gold_light', 'lightsplus:gold_light'},
+		{'lightsplus:gold_light_on', 'lightsplus:gold_light_on', 'lightsplus:gold_light_on'},
 	}
 })
 
 --Gold Light from Slabs
 minetest.register_craft({
-	output = '"lightsplus:gold_light"',
+	output = "lightsplus:gold_light_on",
 	recipe = {
-		{'lightsplus:gold_slab_light'},
-		{'lightsplus:gold_slab_light'},
+		{'lightsplus:gold_slab_light_on'},
+		{'lightsplus:gold_slab_light_on'},
 	}
 })
 
 --Slab Light
 minetest.register_craft({
-	output = '"lightsplus:slab_light" 6',
+	output = "lightsplus:slab_light_on 6",
 	recipe = {
-		{'lightsplus:light', 'lightsplus:light', 'lightsplus:light'},
+		{'lightsplus:light_on', 'lightsplus:light_on', 'lightsplus:light_on'},
 	}
 })
 
 --Light from Slabs
 minetest.register_craft({
-	output = '"lightsplus:light"',
+	output = "lightsplus:light_on",
 	recipe = {
-		{'lightsplus:slab_light'},
-		{'lightsplus:slab_light'},
+		{'lightsplus:slab_light_on'},
+		{'lightsplus:slab_light_on'},
 	}
 })
 
 --Flat Light
 minetest.register_craft({
-	output = '"lightsplus:flat_light" 16',
+	output = "lightsplus:flat_light_on 16",
 	recipe = {
-		{'lightsplus:light'},
+		{'lightsplus:light_on'},
 	}
 })
 
 --Slab Light from Flat Light
 minetest.register_craft({
 	type = "shapeless",
-	output = "lightsplus:slab_light",
-	recipe = {'lightsplus:flat_light', 'lightsplus:flat_light', 'lightsplus:flat_light', 'lightsplus:flat_light', 'lightsplus:flat_light', 'lightsplus:flat_light', 'lightsplus:flat_light', 'lightsplus:flat_light'},
+	output = "lightsplus:slab_light_on",
+	recipe = {
+		'lightsplus:flat_light_on', 'lightsplus:flat_light_on', 'lightsplus:flat_light_on', 
+		'lightsplus:flat_light_on', 'lightsplus:flat_light_on', 'lightsplus:flat_light_on', 
+		'lightsplus:flat_light_on', 'lightsplus:flat_light_on'
+	},
 })
 
 --Gold Flat Light
 minetest.register_craft({
-	output = '"lightsplus:gold_flat_light" 16',
+	output = "lightsplus:gold_flat_light_on 16",
 	recipe = {
-		{'lightsplus:gold_light'},
+		{'lightsplus:gold_light_on'},
 	}
 })
 
 --Gold Slab from Gold Flat Lights
 minetest.register_craft({
 	type = "shapeless",
-	output = "lightsplus:gold_slab_light",
-	recipe = {'lightsplus:gold_flat_light', 'lightsplus:gold_flat_light', 'lightsplus:gold_flat_light', 'lightsplus:gold_flat_light', 'lightsplus:gold_flat_light', 'lightsplus:gold_flat_light', 'lightsplus:gold_flat_light', 'lightsplus:gold_flat_light'},
+	output = "lightsplus:gold_slab_light_on",
+	recipe = {
+		'lightsplus:gold_flat_light_on', 'lightsplus:gold_flat_light_on', 'lightsplus:gold_flat_light_on', 
+		'lightsplus:gold_flat_light_on', 'lightsplus:gold_flat_light_on', 'lightsplus:gold_flat_light_on', 
+		'lightsplus:gold_flat_light_on', 'lightsplus:gold_flat_light_on'
+	},
 })
 
 minetest.register_alias("newlights:light", "lightsplus:light")
@@ -165,11 +174,5 @@ minetest.register_alias("lightsplus:light_flat_on", "lightsplus:flat_light_on")
 minetest.register_alias("lightsplus:light_flat_gold", "lightsplus:gold_flat_light")
 minetest.register_alias("lightsplus:light_flat_on_gold", "lightsplus:gold_flat_light_on")
 
-
-
-
-
-
-
 --	Register the function for use (optional, uncomment the following line to enable)
---	print("[Lights+] Loaded!")
+print("[Lights+] Loaded!")
